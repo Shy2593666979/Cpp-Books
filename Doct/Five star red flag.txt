@@ -1,0 +1,97 @@
+#include<iostream>
+#include<Windows.h>
+#include<graphics.h>
+using namespace std;
+const int x = 300;
+void solid_rectangle()
+{
+	setfillcolor(RED);
+	solidrectangle(0, 0, 1000, 600);
+}
+void solidstar_1()
+{
+	setlinecolor(YELLOW);
+	setlinestyle(PS_SOLID, 2);
+	line(150, 60, 100, 225);
+	Sleep(x);
+	line(100, 225, 240, 120);
+	Sleep(x);
+	line(240, 120, 60, 120);
+	Sleep(x);
+	line(60, 120, 210, 225);
+	Sleep(x);
+	line(210, 225, 150, 60);
+	Sleep(x);
+	
+}
+void solidstar_2()
+{
+	setlinecolor(YELLOW);
+	setlinestyle(PS_SOLID, 2);
+	line(312, 35, 275, 75);
+	Sleep(x);
+	line(275, 75, 330, 60);
+	Sleep(x);
+	line(330, 60, 275, 40);
+	Sleep(x);
+	line(275, 40, 305, 90);
+	Sleep(x);
+	line(305, 90, 312, 35);
+}
+void solidstar_3()
+{
+	setlinecolor(YELLOW);
+	setlinestyle(PS_SOLID, 2);
+	line(345, 90, 355, 150);
+	Sleep(x);
+	line(355, 150, 380, 100);
+	Sleep(x);
+	line(380, 100, 330, 125);
+	Sleep(x);
+	line(330, 125, 390, 135);
+	Sleep(x);
+	line(390, 135, 345, 90);
+}
+void solidstar_4()
+{
+	setlinecolor(YELLOW);
+	setlinestyle(PS_SOLID, 2);
+	line(360, 180, 342, 235);
+	Sleep(x);
+	line(342, 235, 390, 200);
+	Sleep(x);
+	line(390, 200, 330, 200);
+	Sleep(x);
+	line(330, 200, 380, 235);
+	Sleep(x);
+	line(380, 235, 360, 180);
+}
+void solidstar_5()
+{
+	setlinecolor(YELLOW);
+	setlinestyle(PS_SOLID, 2);
+	line(312, 240, 275, 285);
+	Sleep(x);
+	line(275, 285, 330, 270);
+	Sleep(x);
+	line(330, 270, 275, 260);
+	Sleep(x);
+	line(275, 260, 305, 300);
+	Sleep(x);
+	line(305, 300, 312, 240);
+}
+int main()
+{
+	IMAGE image[2];
+	initgraph(1000, 600);
+	solid_rectangle();
+	solidstar_1();
+	solidstar_2();
+	solidstar_3();
+	solidstar_4();
+	solidstar_5();
+	Sleep(500);
+	loadimage(&image[0], "./china.jpg", 1000, 600);
+	putimage(0, 0, &image[0]);
+	system("pause");
+}

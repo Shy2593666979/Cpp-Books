@@ -1,0 +1,68 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+#include<string>
+using namespace std;
+class person
+{
+public:
+	person(string s,int a)
+	{
+		name = s;
+		age = a;
+	}
+	string name;
+	int age;
+};
+class compare
+{
+public:
+	bool operator()(int p)
+	{
+		return p > 5;
+	}
+};
+class compare1
+{
+public:
+	bool operator()(person& p)
+	{
+		return p.age > 18;
+	}
+};
+void printvector(int val)
+{
+	cout << val << " ";
+}
+void printvectorP(person p)
+{
+	cout << p.name << p.age << endl;
+}
+int main()
+{
+	vector<int>v;
+	for (int i = 0;i < 10;i++)
+	{
+		v.push_back(i + 1);
+	}
+	//迭代器遍历
+	for (vector<int>::iterator it = v.begin();it != v.end();it++)
+	{
+		cout << " " << *it;
+	}
+	cout << endl;
+	//利用algorithm中for_each
+	for_each(v.begin(), v.end(), printvector);
+	int num = count(v.begin(), v.end(), 5);
+	cout << "元素5出现的个数:" << num << endl;
+	cout << "比元素5大的个数:" << count_if(v.begin(), v.end(), compare());
+	person p1("iii", 19);
+	person p2("kkk", 20);
+	person p3("aaa", 15);
+	vector<person>p;
+	p.push_back(p1);
+	p.push_back(p2);
+	p.push_back(p3);
+	for_each(p.begin(), p.end(), printvectorP);
+	cout << "年龄大于18个数：" << count_if(p.begin(), p.end(), compare1());
+}

@@ -1,0 +1,58 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<time.h>
+using namespace std;
+class compare
+{
+public:
+	bool operator()(int a, int b)
+	{
+		return a > b;
+	}
+};
+void print_(int val)
+{
+	cout << val << " " ;
+}
+int main()
+{
+	vector<int>v;
+	for (int i = 0;i < 10;i++)
+	{
+		v.push_back(i + 1);
+		v.push_back(20 - i);
+	}
+	//按照从小到大顺序
+	cout << "排序前：" << endl;
+	for_each(v.begin(), v.end(), print_);
+	cout << "排序后：" << endl;
+	sort(v.begin(), v.end());
+	for_each(v.begin(), v.end(), print_);
+	//按照从大到小的顺序
+	cout << "改变大——小顺序后：" << endl;
+	sort(v.begin(), v.end(), compare());
+	for_each(v.begin(), v.end(), print_);
+	//种下随机数种子
+	srand((unsigned int)time(NULL));
+	random_shuffle(v.begin(), v.end());
+	cout << "随机排列之后" << endl;
+	for_each(v.begin(), v.end(), print_);
+	vector<int>v1, v2;
+	for (int i = 0;i < 5;i++)
+	{
+		v1.push_back(i);
+		v2.push_back(i + 1);
+	}
+	vector<int>v3;
+	v3.resize(v1.size() + v2.size());
+	merge(v1.begin(), v1.end(), v2.begin(), v2.end(), v3.begin());
+	cout << " 合并后  " << endl;
+	for_each(v3.begin(), v3.end(), print_);
+	cout << "反转前：" << endl;
+	for_each(v.begin(), v.end(), print_);
+	reverse(v.begin(), v.end());
+	cout << "反转后" << endl;
+	for_each(v.begin(), v.end(), print_);
+	return 0;
+}

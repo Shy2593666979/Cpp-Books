@@ -1,0 +1,59 @@
+#include<iostream>
+#include<map>
+using namespace std;
+class compare  //利用仿函数重新制定规则
+{
+public:
+	bool operator()(int m1, int m2)
+	{
+		return m1 > m2;
+	}
+};
+void printmap(map<int ,int >m)
+{
+	for (map<int, int> ::iterator it = m.begin();it != m.end();it++)
+	{
+		cout << "键值" << it->first << "实值" << it->second << endl;
+	}
+}
+int main()
+{
+	map<int, int > m;
+	m.insert(pair<int, int >(1, 10));//map的存取元素与set相同
+	m.insert(pair<int, int >(2, 20));
+	m.insert(pair<int, int >(3, 30));
+	m.insert(pair<int, int >(4, 40));
+	printmap(m);
+	m.erase(3);//删除key（键值）的元素
+	m.erase(m.begin()); //删除开头元素
+	map<int, int >m2;
+	m2.insert(pair<int, int >(6, 60));
+	m2.insert(pair<int, int >(7, 70));
+	m2.insert(pair<int, int >(8, 80));
+	cout << "交换前：" << endl;
+	printmap(m);
+	printmap(m2);
+	m.swap(m2);
+	cout << "交换后：" << endl;
+	printmap(m);
+	printmap(m2);
+	m2.empty();  //表示map中是否为空
+	map<int, int>::iterator pos = m2.find(3);
+	if (pos==m2.end())
+	{
+		cout << "未找到!" << endl;
+	}
+	else {
+		cout << "找到！" << (*pos).first<<(*pos).second << endl;
+	}
+	int num = m2.count(3);  //map中无重复元素，只可能是0/1
+	//因为map存取元素后就按照键值key进行从小到大排序，通过类来改变排列顺序
+	map<int, int, compare>m3;
+	m3.insert(pair<int, int>(1, 10));
+	m3.insert(pair<int, int>(3, 30));
+	m3.insert(pair<int, int>(2, 20));
+	for (map<int, int, compare> ::iterator it = m3.begin();it != m3.end();it++)
+	{
+		cout << it->first << it->second << endl;
+	}
+}

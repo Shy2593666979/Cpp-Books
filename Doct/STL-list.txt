@@ -1,0 +1,105 @@
+#include<iostream>
+#include<list>
+#include<algorithm>
+using namespace std;
+class person
+{
+public:
+	person(int h, int w)
+	{
+		height = h;
+		weight = w;
+	}
+	int height;
+	int weight;
+};
+void printlist(list<int >& l)
+{
+	for (list<int >::iterator it = l.begin();it != l.end();it++)
+	{
+		cout << *it << " ";
+	}
+	cout << endl;
+}
+bool compare(int l1, int l2)
+{
+	if (l1 > l2)
+	{
+		return ture;
+	}
+	else
+	{
+		return false;
+	}
+}
+bool Compare(person p1,person p2)  //用户自定义类型排序
+{
+	if (p1.height == p2.height) {
+		return p1.weight > p2.weight;
+	}
+	else
+	{
+		return  p1.height < p2.height;
+	}
+}
+int main()
+{
+	list<int>l;
+	for (int i = 0;i < 10;i++)
+	{
+		l.push_back(i);  //存取元素
+	}
+	printlist(l);
+	l.push_front(-1);  //在首位添加-1
+	l.push_back(10);  //在结尾添加10
+	printlist(l);
+	l.pop_back();  //尾删
+	l.pop_front(); //头删
+	printlist(l);
+	l.insert(l.begin(), 10);  //在开头添加10
+	//l.erase(l.end());  //意思相当于l.pop_back(),删除最后一个元素（最好不用）
+	l.erase(l.begin(), l.end());  //相当于l.clear(),清空元素
+	l.clear();  
+	printlist(l);    
+	l.push_back(1);   //输入list元素
+	l.push_back(10);
+	l.push_back(0);
+	l.push_back(100);
+	l.push_back(100);
+	l.remove(100);  //移除list中元素100，剩余10
+	printlist(l);
+	//list容器的迭代器是双向迭代器，不支持随机访问
+	//list<int>::iterator it = l.begin();
+	//it = it + 1;  错误，不可以跳跃访问，即使是+1，只可以++，--
+	cout << "现在的list容器元素" << endl;
+	printlist(l);
+	cout << "翻转后的list容器元素" << endl;
+	l.reverse();
+	printlist(l);
+	l.sort();  //（从小到大），不能指定元素的排列顺序
+	cout << "运用外函数后的排序" << endl;
+	l.sort(compare);  //可以指定元素的排列顺序
+	printlist(l);
+	//利用用户自定义数据进行排序
+	//要求：先按照身高排序，身高相同再按照体重排序
+	person p1(180, 120);
+	person p2(175, 130);
+	person p3(180, 130);
+	person p4(180, 145);
+	list<person>l1;
+	l1.push_back(p1);
+	l1.push_back(p2);
+	l1.push_back(p3);
+	l1.push_back(p4);
+	cout << "排序前" << endl;
+	for (list<person>::iterator it = l1.begin();it != l1.end();it++)
+	{
+		cout << "身高为" << it->height << "体重为" << it->weight << endl;
+	}
+	cout << "排序后:" << endl;
+	l1.sort(Compare);
+	for (list<person>::iterator it = l1.begin();it != l1.end();it++)
+	{
+		cout << "身高为" << it->height << "体重为" << it->weight << endl;
+	}
+}

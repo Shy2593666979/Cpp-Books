@@ -1,0 +1,111 @@
+#include<iostream>
+#include<string>
+using namespace std;
+void test01()  //1.string 基本概念
+{
+	string s1 = "kkkkllll";
+	string s2(s1);
+	cout <<"s2=" << s2 << endl;
+	string s2(10, '6');
+	cout <<"s2=" << s2 << endl;
+}
+void test02()  //2.string 赋值操作
+{
+	string s1 = "the shy";
+	string s2 = s1;
+	cout << "s2=" << s2 << endl;
+	string s3;
+	s3.assign("the shy");
+	cout << "s3=" << s3 << endl;
+	s2.assign(s1);
+	cout << "s2=" << s2 << endl;
+	string s4;
+	s4.assign(10, 'x');
+	cout << "s4=" << s4 << endl;
+}
+void test03()  //3.字符串的拼接
+{
+	string s1 = "I";
+	s1 = s1 + "Love";
+	cout << "s1=" << s1 << endl;  //I Love
+	string s2 = "game";
+	s1.append(s2);
+	cout << "s1=" << s1 << endl;  //I Love game
+	string s3 = "LoL CF";
+	s1 = s1 + s3.append(s3, 2);
+	cout << "s1=" << s1 << endl;//I Love game Lol
+	s3.append(s3, 0, 3);//从0开始，截取三个字母
+	cout << "s3=" << s3 << endl;//Lol
+
+}
+void test04()  //4.string 的查找与替换
+{
+	string s1 = "abcdefgh";
+	int pos = s1.find("de");
+	cout << "pos=" << pos << endl;  //已查到 pos=3
+	int pos = s1.find("df");
+	cout << "pos=" << pos << endl;  //未查到 pos=-1
+	//s1.find("d",n)从下标n开始查找
+	string s2 = "x";
+	s1.replace(0, 5, s2);//将0位置后的5个字符替换成s2
+	cout << "s1=" << s1 << endl;
+}
+void test05() //5.字符串的比较
+{
+	string s1 = "ths.";
+	string s2 = "shy.";
+	int pos=s1.compare(s2);
+	if (pos > 0)
+	{
+		cout << "s1>s2" << endl;
+	}
+	if (pos == 0)
+	{
+		cout << "s1=s2" << endl;
+	}
+	if (pos < 0)
+	{
+		cout << "s1<s2" << endl;
+	}
+}
+void test06()  //6.字符串的存取、修改
+{
+	string s1 = "abcdefgh";
+	for (int i = 0;i < s1.size();i++)
+	{
+		cout << s1.at(i) << endl;
+		cout << s1[i] << endl;
+	}
+	s1[5] = 'z';
+	s1.at(5) = 'z';
+	cout << "s1=" << s1 << endl;
+}
+void test07()  //7.字符串的插入、删除
+{
+	string s1 = "qwertyuiop";
+	s1.insert(1, "abd");//在1的位置后插入abd
+	cout << "s1=" << s1 << endl;
+	s1.insert(0, 2, 'x');
+	cout << "s1=" << s1 << endl;
+	string s2 = "abcdefg";
+	s2.erase(0, 3);//删除下标0-3的字符
+	cout << "s2=" << s2 << endl;
+}
+void test08()  //8.字符串的截取
+{
+	string s1 = "2593666979@qq.com";
+	int pos = s1.find("@");
+	string s2 = s1.substr(0, pos);
+	cout << "s2=" << s2 << endl;  //s2=2593666979
+}
+int main()
+{
+	test01();
+	test02();
+	test03();
+	test04();
+	test05();
+	test06();
+	test07();
+	test08();;
+}

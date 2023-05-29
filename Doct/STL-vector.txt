@@ -1,0 +1,138 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+void PrintVector(vector<int> &v)
+{
+	for (vector<int >::iterator it = v.begin();it != v.end();it++)
+	{
+		cout << (*it) << "  " ;
+	}
+	cout << endl;
+}
+void test01()  	//基础的vector容器赋值
+{
+	vector<int>v1;
+	for (int i = 0;i < 10;i++)
+	{
+		v1.push_back(i);
+	}
+	PrintVector(v1);
+	vector<int >v2(v1.begin(),v1.end());  //将v1赋值给v2
+	PrintVector(v2);
+	vector<int >v3(v2);  //将v2赋值给v3
+	PrintVector(v3);
+	vector<int >v4(10, 100);  //表示10个100存在vector容器中
+	PrintVector(v4);
+	vector<int >v5;
+	v5.assign(v4.begin(),v4.end());
+	PrintVector(v5);  //将v4赋值给v5
+
+}
+void test02() //vector容量、大小
+{
+	vector<int >v1;
+	for (int i = 0;i < 10;i++)
+	{
+		v1.push_back(i);
+	}
+	if(v1.empty())
+	{
+		cout << "vector为空！" << endl;
+	}
+	else
+	{
+		cout << "vector不为空！" << endl;
+	}
+	int num1 = v1.capacity();
+	cout << "v1.capacity = " << num1 << endl;  //vector容器v1的容量
+	int num2 = v1.size();
+	cout << "v2.size = " << num2 << endl;  //vector容器v1的大小
+	//一般情况下容量capacity要比大小size稍微大一些
+	v1.resize(15);  //改变容器的size，多余的默认值为0
+	PrintVector(v1);
+	v1.resize(5);  //改变容器的size，只取vector中前5
+	PrintVector(v1);
+}
+void test03()  //vector容器的删除、插入
+{
+	vector<int >v1;
+	for (int i = 0;i < 10;i++)
+	{
+		v1.push_back(i);
+	}
+	v1.push_back(11);  //尾端插入11
+	PrintVector(v1);
+	v1.pop_back();  //尾端删除一个元素
+	PrintVector(v1);
+	v1.insert(v1.begin(), -1);  //在起始位插入-1
+	v1.insert(v1.begin(), 2, 1); //在起始位插入2个1
+	PrintVector(v1);
+	v1.erase(v1.end());
+	v1.erase(v1.begin(), v1.end());  //删除vector所有元素
+	v1.clear();  //清空vector
+	PrintVector(v1);
+}
+void test04()  //vector容器的存储
+{
+	/*   除了用迭代器获取vector容器中元素，[]和at也可以
+	     front返回容器第一个元素
+		 back返回容器最后一个元素
+		 vector互换容器   */
+	vector<int >v1;
+	for (int i = 0;i < 10;i++)
+	{
+		v1.push_back(i);
+	}
+	v1.at(10);  //在尾端存储10
+	cout << "v1第一个元素 ：" << v1.front() << endl;
+	cout << "v1最后一个元素 ：" << v1.back() << endl;
+}
+void test05() //vector互换容器
+{
+	vector<int >v1, v2;
+	for (int i = 0;i < 10;i++)
+	{
+		v1.push_back(i);
+		v2.push_back(9 - i);
+	}
+	    PrintVector(v1);
+		PrintVector(v2);
+		cout << "互换后" << endl;
+		v1.swap(v2);
+		PrintVector(v1);
+		PrintVector(v2);
+		//通过与匿名对象交换来改变容量大小
+		v1.resize(5);
+		cout << "v1容量为：" << v1.capacity() << endl;
+		cout << "v1大小为：" << v1.size() << endl;
+		vector<int >(v1).swap(v1);  //收缩内存
+		cout << "v1容量为：" << v1.capacity() << endl;
+		cout << "v1大小为：" << v1.size() << endl;
+
+}
+void test06()  //预留空间
+{
+	vector<int> v1;
+	v1.reserve(100000);
+	int num = 0;
+	int* p = NULL;
+	for (int i = 0; i < 100000; i++)
+	{
+		v1.push_back(i);
+		if (p != &v1[0])
+		{
+			p = &v1[0];
+			num++;
+		}
+	}
+	cout << "num:" << num << endl;
+}
+int main()
+{
+	test01();
+	test02();
+	test03();
+	test04();
+	test05();
+	test06();
+}

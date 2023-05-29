@@ -1,0 +1,108 @@
+#include<iostream>
+#include<set>
+#include<string>
+using namespace std;
+class person
+{
+public:
+	person(string n, int a)
+	{
+		name = n;
+		age = a;
+	}
+	string name;
+	int age;
+};
+class mycompare
+{
+public:
+	bool operator ()(const person& p1, const person& p2)
+	{
+		return p1.age > p2.age;
+	}
+};
+class compare
+{
+public:
+	bool operator()(const int & a, const int & b)
+	{
+		return a > b;
+	}
+};
+void printset(set<int >& s)
+{
+	for (set<int >::iterator it = s.begin();it != s.end();it++)
+	{
+		cout << *it << " ";
+	}
+	cout << endl;
+}
+int main()
+{
+	set<int >s;  //在set中，只有insert输入数据，无push_back,不能存取相同的元素
+	s.insert(10);   //set存取元素后自动排序（小——大）
+	s.insert(20);
+	s.insert(30);
+	s.insert(40);
+	printset(s);
+	//判断set容器的大小
+	cout << "s.size()=" << s.size();
+	if (s.empty())
+	{
+		cout << "不为空！" << endl;
+	}
+	else
+	{
+		cout << "s为空！" << endl;
+	}
+	set<int >s1;
+	s1.insert(100);
+	cout << "交换前:" << endl;
+	printset(s);
+	printset(s1);
+	s1.swap(s);  //相同数据类型的两个set可交换元素
+	cout << "交换后：" << endl;
+	printset(s);
+	printset(s1);
+	s.clear();  //清空元素
+	printset(s);
+	s.insert(10);
+	s.insert(20);
+	s.insert(30);
+	s.insert(40);
+	s.erase(s.begin());  //删除首元素
+	s.erase(10);  //删除指定的元素
+	int m = s.count(10);  //判断容器内cout的个数，此情况下只可能是0或1;
+	set<int >::iterator  pos = s.find(30);
+	if (*pos)
+	{
+		cout << "找到该元素了！" << *pos << endl;
+	}
+	else {
+		cout << "未找到" << endl;
+	}
+	//set容器默认从小到大排序，下面重新定义顺序
+	set<int, compare>s2;
+	s2.insert(40);
+	s2.insert(10);
+	s2.insert(20);
+	s2.insert(30);
+	cout << "重新定义顺序后" << endl;
+	for (set<int, compare>::iterator it = s2.begin();it != s2.end();it++)
+	{
+		cout << " " << *it << " ";
+	}
+	cout << endl;
+	//利用用户自定义数据来排序
+	person p1("天猫", 123);
+	person p2("京东", 345);
+	person p3("淘宝", 134);
+	set<person, mycompare> S;
+	S.insert(p1);
+	S.insert(p2);
+	S.insert(p3);
+	for (set<person, mycompare>::iterator it = S.begin();it != S.end();it++)
+	{
+		cout << it->name << it->age << endl;;
+	}
+}

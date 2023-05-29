@@ -1,0 +1,36 @@
+#include "mainwindow.h"
+#include <QApplication>
+#include<QSqlError>
+#include<QSqlQuery>
+#include<QString>
+#include<QDebug>
+#include<QMessageBox>
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+        QSqlDatabase db=QSqlDatabase::addDatabase("QMYSQL");    //括号内要写出数据库的类型
+        //设置数据库
+        db.setHostName("localhost"); //设置数据库的主机ip
+        //设置数据库的用户名
+        db.setPort(3307);
+        db.setUserName("root");
+        //设置数据库的密码
+        db.setPassword("mingguang0703");    //这个就是安装MySQL时设置的密码
+        //设置数据库的名字
+        db.setDatabaseName("test");
+        //打开数据库（已经安装过mysql驱动了）
+        if(db.open()==false){
+                qDebug() << "no";
+            }
+        else
+        {
+            qDebug()<<"yes";
+        }
+    QSqlQuery query;
+    QString sql="insert into student(id,name) values(212882,'tian')";
+    query.exec(sql);
+    query.exec("insert into student(id ,name) values(2128824092,'光')");
+    return a.exec();
+}

@@ -1,0 +1,74 @@
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+class person
+{
+public:
+	person(int n, string na)
+	{
+		num = n;
+		name = na;
+	}
+	int num;
+	string name;
+};
+int main()
+{
+	//vector容器的一般用法
+	/*
+	vector<int >vet;
+	vet.push_back(1);
+	vet.push_back(2);
+	vet.push_back(3);
+	vet.push_back(4);
+	vector<int> ::iterator ite_b=vet.begin();
+	vector<int>::iterator ite_n = vet.end();
+	for (;ite_b != ite_n;ite_b++)
+	{
+		cout << " " << *ite_b << endl;
+	}
+	for (vector<int >::iterator it = vet.begin();it != vet.end();it++)
+	{
+		cout << "-" << *it << endl;
+	}
+	*/
+	//vector容器的自定义类型用法
+	/* 
+	vector<person>vet;
+	person p1(90, "田");
+	person p2(95, "明");
+	person p3(99, "广");
+	vet.push_back(p1);
+	vet.push_back(p2);
+	vet.push_back(p3);
+	for (vector<person>::iterator it=vet.begin();it != vet.end();it++)
+	{
+		cout << "  " << (*it).num << (*it).name << endl;
+	}*/
+	//vetctor容器的嵌套用法
+	/*vector<vector<int>>v;
+	vector<int>vet1;
+	vector<int>vet2;
+	vector<int>vet3;
+	vector<int>vet4;
+	for (int i = 0;i < 4;i++)
+	{
+		vet1.push_back(i + 1);
+		vet2.push_back(i + 2);
+		vet3.push_back(i + 3);
+		vet4.push_back(i + 4);
+	}
+	v.push_back(vet1);
+	v.push_back(vet2);
+	v.push_back(vet3);
+	v.push_back(vet4);
+	for (vector<vector<int >>::iterator it = v.begin();it != v.end();it++)
+	{
+		for (vector<int>::iterator itr = (*it).begin();itr != (*it).end();itr++)
+		{
+			cout << " " << (*itr) ;
+		}
+		cout << endl;
+	}*/
+}

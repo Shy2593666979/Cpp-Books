@@ -1,0 +1,44 @@
+#include<iostream>
+#include<algorithm>
+#include<numeric>
+#include<vector>
+using namespace std;
+void print_(int val)
+{
+	cout << val << " " << endl;
+}
+int main()
+{
+	vector<int>v1;
+	for (int i = 0;i < 100;i++)
+	{
+		v1.push_back(i);
+	}
+	cout << "调用算法累加后：" << endl;
+	cout << accumulate(v1.begin(), v1.end(), 0) << endl;
+	fill(v1.begin(), v1.end(), 100);
+	cout << " 添加元素后：" << endl;
+	for_each(v1.begin(), v1.end(), print_);
+	vector<int>v2, v3,v4,v5,v6;
+	for (int i = 0;i < 10;i++)
+	{
+		v2.push_back(i + 1);
+		v3.push_back(i + 5);
+	}
+	//必须给目标容器开辟空间
+	v4.resize(v3.size() + v2.size());
+	v5.resize(v3.size() + v2.size());
+	v6.resize(v3.size() + v2.size());
+	cout << "求v2、v3交集：" << endl;
+	set_intersection(v2.begin(), v2.end(), v3.begin(), v3.end(), v4.begin());
+	for_each(v4.begin(), v4.end(), print_);
+	cout << endl;
+	cout << "求v2、v3的并集：" << endl;
+	set_union(v2.begin(), v2.end(), v3.begin(), v3.end(), v5.begin());
+	for_each(v5.begin(), v5.end(), print_);
+	cout << endl;
+	cout << "求v2、v3的差集：" << endl;
+	set_difference(v2.begin(), v2.end(), v3.begin(), v3.end(), v6.begin());
+	for_each(v6.begin(), v6.end(),print_);
+	cout << endl;
+}

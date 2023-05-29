@@ -1,0 +1,110 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+#include<string>
+using namespace std;
+class person
+{
+public:
+	bool operator==(const person& p1)
+	{
+		if (name==p1.name && age == p1.age)
+		{
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	person(string nam, int a)
+	{
+		name = nam;
+		age = a;
+	}
+	string name;
+	int age;
+}; 
+class compare
+{
+public:
+	bool operator()(person& p)
+	{
+		if (p.age > 18)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+};
+int main()
+{
+	vector<int>v;
+	for (int i = 0;i < 10;i++)
+	{
+		v.push_back(i + 1);
+	}
+	vector<int>::iterator it = find(v.begin(), v.end(), 5);
+	if (it == v.end())
+	{
+		cout << "没找到！" << endl;
+	}
+	else
+	{
+		cout << "找到！" << *it << endl;
+	}
+	person p1("田", 19);
+	person p2("王", 20);
+	person p3("梁", 18);
+	person p5("广", 15);
+	person p4("gu", 16);
+	person p6("ii", 21);
+	vector<person>v1;
+	v1.push_back(p1);
+	v1.push_back(p2);
+	v1.push_back(p3);
+	v1.push_back(p4);
+	v1.push_back(p5);
+	v1.push_back(p6);
+	vector<person>::iterator its = find(v1.begin(), v1.end(), p1);
+	if (its == v1.end())
+	{
+		cout << "未找到！" << endl;
+	}
+	else
+	{
+		cout << "找到！" << its->name << "  " << its->age << endl;
+	}
+
+	//根据所要找寻条件搜索
+	vector<person>::iterator iter = find_if(v1.begin(), v1.end(), compare());
+	if (iter == v1.end())
+	{
+		cout << "未找到！" << endl;
+	}
+	else
+	{
+		cout << "找到！(单个)" << iter->name << "  " << iter->age << endl;
+	}
+	/*vector<person>::iterator b = v1.begin();
+	vector<person>::iterator e = v1.end();
+	vector<person>::iterator a = v1.begin();
+	int pos = 0;
+	while (1)
+	{
+		b = a;
+		vector<person>::iterator ite = find_if(b, e, compare());
+		if (ite == v1.end())
+		{
+			cout << "未找到！" << endl;
+			break;
+		}
+		else
+		{
+			cout << "找到(多数)！" << ite->name << "  " << ite->age << endl;
+			a = b;
+		}
+	}*/
+}
